@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import clayful from 'clayful/client-js'
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import clayful from 'clayful/client-js';
 
 /**
  * 회원가입 페이지 함수
  */
 function RegisterPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const [email, setEmail] = useState(""); //아이디 혹은 이메일
+  const [password, setPassword] = useState(""); //최소 8자
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -18,7 +19,7 @@ function RegisterPage() {
   }
 
   const handleSubmit = (event) => {
-    event.preventDefault();
+    event.preventDefault(); //자동으로 리프레쉬되는걸 막아줌
     var Customer = clayful.Customer;
 
     var payload = {
@@ -32,11 +33,10 @@ function RegisterPage() {
         if (err) {
             // Error case
             console.log(err.code);
+            return;
         }
     
-        var data = result.data;
-    
-        console.log(data);
+        navigate("/login");
     
     });
   };
@@ -44,10 +44,10 @@ function RegisterPage() {
   return (
     <div className="auth-wrapper">
       <h1>회원가입.</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}> 
         <input
         onChange={handleEmailChange}
-        placeholder="Apple Id"
+        placeholder="Apple ID"
         type="email"
         name="email"
         value={email}
