@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import clayful from 'clayful/client-js';
+import { AuthContext } from '../../context/AuthContext';
 
 function LoginPage() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { isAuthenticated } = useContext(AuthContext);
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -37,10 +39,12 @@ function LoginPage() {
         localStorage.setItem("customerUid", data.customer);
         localStorage.setItem("accessToken", data.token);
         navigate("/");
+        isAuthenticated();
     });
   };
 
   return (
+    <div className="pageWrapper">
     <div className="auth-wrapper">
     <h1>로그인.</h1>
 
@@ -65,11 +69,12 @@ function LoginPage() {
       </p>
 
       <button type="submit">로그인.</button>
-      <Link to="register" style={{ color:"gray", textDecoration: "none" }}>
+      <Link to="/register" style={{ color:"gray", textDecoration: "none" }}>
         {" "}
         Apple ID가 없으신가요? 지금 생성.
       </Link>
     </form>
+    </div>
     </div>
   )
 };
