@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import clayful from "clayful/client-js";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import ProductInfos from './Sections/ProductInfos';
+import ProductInfo from './Sections/ProductInfo';
 
 
 function DetailProductPage() {
@@ -37,7 +37,7 @@ function DetailProductPage() {
                 </div>
             </Col>
             <Col md>
-                <ProductInfos detail={item} />
+                <ProductInfo detail={item} />
             </Col>
         </Row>
         <div dangerouslySetInnerHTML={{ __html: item.description}} />

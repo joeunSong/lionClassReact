@@ -7,9 +7,10 @@ import RegisterPage from './pages/RegisterPage/RegisterPage';
 import AuthContextProvider from './context/AuthContext';
 import Header from "./components/Header";
 import DetailProductPage from "./pages/DetailProductPage/DetailProductPage";
+import CartPage from "./pages/CartPage/CartPage";
 
 function App() {
-  //const AuthContext =createContext();
+  
   return (
   <AuthContextProvider>
     <Header />
@@ -18,6 +19,7 @@ function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/product/:productId" element={<DetailProductPage />} />
+      <Route path="/user/cart" element={<CartPage />} />
     </Routes>
   </AuthContextProvider>
   );
